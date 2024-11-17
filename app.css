@@ -85,3 +85,24 @@
     color: #17090e;
    
   }
+  .error-div {
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
+    font-size: large;
+    font-weight: bold;
+    align-items: center;
+    }
+    .error-div span + span {
+    margin-left: 70px;
+    
+    background-color: #f44336;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    
+    }
+    .error-div span + span:hover {
+    cursor: pointer;
+    background-color: #d54036;
+    } 
