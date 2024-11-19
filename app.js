@@ -25,18 +25,18 @@ async function getRepos() {
   if (data.length === 0) {
   reposData.innerHTML = `<span>No repositories found for user "${githubUser}".</span>`;
   } else {
-   repoRendering()
+   repoRendering(data , githubUser)
 
   }  
        } catch (error) {
-        console.log(`Error: ${error.message}`)
+        renderingError(error)
 
        }
    }
         }
 
 
- function repoRendering(){
+ function repoRendering(data , githubUser){
 
      data.forEach(repo => {
   let repoDiv = document.createElement('div');
@@ -63,4 +63,20 @@ async function getRepos() {
   
      });
    }
-
+ 
+   function renderingError(error){
+    reposData.innerHTML = '';
+    let errorDiv = document.createElement('div');
+    errorDiv.classList.add('error-div');
+    
+    let errorMessage = document.createElement('span');
+    errorMessage.textContent = `Error: ${error.message}`;
+    errorDiv.appendChild(errorMessage);
+    
+    let tryAgainButton = document.createElement('span');
+    tryAgainButton.textContent = 'Try Again';
+    errorDiv.appendChild(tryAgainButton);
+    reposData.appendChild(errorDiv);
+  
+    
+}
