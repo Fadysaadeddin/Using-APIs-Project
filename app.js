@@ -1,66 +1,81 @@
 
-let input = document.querySelector('.get-repos input');
-let getButton = document.querySelector('.get-button');
-let reposData = document.querySelector('.show-data');
-let spinner = document.createElement('div');
+
+const input = document.querySelector('.get-repos input');
+const getButton = document.querySelector('.get-button');
+const reposData = document.querySelector('.show-data');
+const spinner = document.createElement('div');
 spinner.className = 'spinner';
 spinner.style.display = 'none'; 
 reposData.appendChild(spinner);
+
 getButton.addEventListener('click', getRepos);
 
+async function loader(duration) {
+    spinner.style.display = 'block'; 
+    await delay(duration);          
+   
+}
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function cleanPage() {
-    reposData.innerHTML = '';
+ function cleanPage() {
     input.value = '';
-    spinner.style.display = 'none';
+
+    reposData.innerHTML = ' <span>No Data To Show</span>';
+    
 }
 async function getRepos() {
-    let githubUser = input.value.trim()
+    try { 
+    let githubUser = input.value.trim();
 
    if (githubUser === '') {
+   await loader(1000);
+   
        reposData.innerHTML = '<span> Please enter a valid username </span>';
    } else {
-       try {
-        spinner.style.display = 'block';
-  
-
-        await delay(1000);
+    await loader(1000);
 
   const response = await fetch(`https://api.github.com/users/${githubUser}/repos`);
   
   if (!response.ok) {
     
+   
       throw new Error(`Fetch failed: ${response.status}`);
   }
-  
+
   const data = await response.json();
   reposData.innerHTML = '';
 
- spinner.style.display = 'none';
+  if (Math.random() < 0.30) {
+    
+    throw new Error('Server is down');
+  }
+
   
   if (data.length === 0) {
   reposData.innerHTML = `<span>No repositories found for user "${githubUser}".</span>`;
-  } else {
-   repoRendering(data , githubUser)
+  } 
+   repoRender(data , githubUser)
 
-  }  
+
+   }
+ 
+   
        } catch (error) {
        
-        renderingError(error)
+        renderError(error)
 
        }
    }
-        }
+        
 
 
- function repoRendering(data , githubUser){
+ function repoRender(data , githubUser){
 
      data.forEach(repo => {
   let repoDiv = document.createElement('div');
-  let repoName = document.createTextNode(repo.name);
+  let repoName = document.createTextNode(repo.name.toUpperCase());
   repoDiv.appendChild(repoName);
   repoDiv.className = 'repo-box';
    
@@ -71,7 +86,7 @@ async function getRepos() {
   repoDiv.appendChild(url);
    
   let forksSpan = document.createElement('span');
-  forksSpan.textContent = `Forks: ${repo.forks}`;
+  forksSpan.textContent = `Forks: ${repo.forks}`; 
   repoDiv.appendChild(forksSpan);
    
   let description = document.createElement('p');
@@ -85,7 +100,7 @@ async function getRepos() {
      });
    }
  
-   function renderingError(error){
+   function renderError(error){
     reposData.innerHTML = '';
     let errorDiv = document.createElement('div');
     errorDiv.classList.add('error-div');
@@ -95,14 +110,24 @@ async function getRepos() {
     errorDiv.appendChild(errorMessage);
     
     let tryAgainButton = document.createElement('span');
-    tryAgainButton.textContent = 'Try Again';
+    tryAgainButton.textContent = 'home Page';
     errorDiv.appendChild(tryAgainButton);
     reposData.appendChild(errorDiv);
     tryAgainButton.addEventListener('click', () => {
-          cleanPage();
-          getRepos();
+       
+        cleanPage()
     
       });
+
+      let homePage = document.createElement('span');
+      homePage.textContent = 'Try Again';
+      errorDiv.appendChild(homePage);
+      reposData.appendChild(errorDiv);
+      homePage.addEventListener('click', () => {
+        
+         getRepos()
+      
+        });
   
     
 }
