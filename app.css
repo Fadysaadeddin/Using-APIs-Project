@@ -1,6 +1,6 @@
 
-* {
-  box-sizing: border-box;
+  * {
+    box-sizing: border-box;
 
   }
   body {
@@ -86,28 +86,28 @@
    
   }
   .error-div {
-display: flex;
-justify-content: center;
-margin-right: 30px;
-font-size: large;
-font-weight: bold;
-align-items: center;
-}
-.error-div span + span {
-margin-left: 70px;
+ display: flex;
+ justify-content: center;
+ margin-right: 30px;
+ font-size: large;
+ font-weight: bold;
+ align-items: center;
+ }
+ .error-div span + span {
+ margin-left: 70px;
+ 
+ background-color: #f44336;
+ color: #fff;
+ padding: 5px;
+ border-radius: 5px;
+ 
+ }
+ .error-div span + span:hover {
+ cursor: pointer;
+ background-color: #d54036;
+ } 
 
-background-color: #f44336;
-color: #fff;
-padding: 5px;
-border-radius: 5px;
-
-}
-.error-div span + span:hover {
-cursor: pointer;
-background-color: #d54036;
-} 
-
-.spinner {
+ .spinner {
 border: 8px solid #f3f3f3;
 border-top: 8px solid #3498db;
 border-radius: 50%;
@@ -126,91 +126,96 @@ justify-content: center;
 
 
 @media (max-width: 890px) {
-.repos-container {
-width: 610px;
+  .repos-container {
+ width: 610px;
+
+  }
+.get-repos {
+ padding: 20px;
+
+  }
+  
+  
+.get-button {
+ width: 120px;
+  
+  }
+  .repo-box {
+ font-size: 15px;
+  }
+  
+.repo-box a ,
+.repo-box span {
+  
+ font-size: 17px;
+
+  }
+  
+  }
+  
+  @media (max-width: 624px) {
+  .repos-container {
+ width: 400px;
  
-}
- .get-repos {
-padding: 20px;
+  }
+  
+  input {
  
-}
+ font-size: 17px;
+ height: 48px;
+  
+  }
+  
+.get-button {
+ width: 120px;
+  
+ height: 48px;
+ line-height: 48px;
 
 
- .get-button {
-width: 120px;
+  
+  }
+.show-data {
+ padding: 15px;
 
-}
-.repo-box {
-font-size: 15px;
-}
+  }
+  .repo-box {
 
- .repo-box a ,
- .repo-box span {
-
-font-size: 17px;
- 
- 
-
-}
-
-}
-
-@media (max-width: 624px) {
-.repos-container {
-width: 400px;
-
-}
-
-input {
-
-font-size: 17px;
-height: 48px;
-
-}
-
- .get-button {
-width: 120px;
-
-height: 48px;
-line-height: 48px;
- 
- 
-
-}
- .show-data {
-padding: 15px;
- 
-}
-.repo-box {
- 
-padding: 10px;
-color: #e91e63;
-font-size: medium;
- 
-}
-
- .repo-box a ,
- .repo-box span {
-
- 
-
-font-size: 15px;
-width: 70px;
-
-
-}
-
-
-.repo-box {
-font-size: 15px;
-}
-
-.error-div {
-
- margin-right: 10px;
+ padding: 10px;
+ color: #e91e63;
  font-size: medium;
 
-}
+  }
+  
+.repo-box a ,
+.repo-box span {
+  
 
-
-} 
+  
+ font-size: 15px;
+ width: 70px;
+ 
+  
+  }
+  
+  
+  .repo-box {
+  font-size: 15px;
+  }
+  
+  .error-div {
+  
+margin-right: 5px;
+font-size: medium;
+ 
+  
+  }
+  .error-div span + span {
+ font-size: 12px;
+ font-weight:100;
+ margin-left: 10px;
+  }
+  
+  
+  } 
+     
