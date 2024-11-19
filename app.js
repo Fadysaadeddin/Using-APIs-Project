@@ -11,6 +11,12 @@ getButton.addEventListener('click', getRepos);
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+function cleanPage() {
+    reposData.innerHTML = '';
+    input.value = '';
+    spinner.style.display = 'none';
+}
 async function getRepos() {
     let githubUser = input.value.trim()
 
@@ -73,6 +79,7 @@ async function getRepos() {
   repoDiv.appendChild(description);
    
   reposData.appendChild(repoDiv);
+  
 
   
      });
@@ -91,6 +98,11 @@ async function getRepos() {
     tryAgainButton.textContent = 'Try Again';
     errorDiv.appendChild(tryAgainButton);
     reposData.appendChild(errorDiv);
+    tryAgainButton.addEventListener('click', () => {
+          cleanPage();
+          getRepos();
+    
+      });
   
     
 }
