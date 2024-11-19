@@ -2,7 +2,15 @@
 let input = document.querySelector('.get-repos input');
 let getButton = document.querySelector('.get-button');
 let reposData = document.querySelector('.show-data');
+let spinner = document.createElement('div');
+spinner.className = 'spinner';
+spinner.style.display = 'none'; 
+reposData.appendChild(spinner);
 getButton.addEventListener('click', getRepos);
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 async function getRepos() {
     let githubUser = input.value.trim()
 
@@ -10,6 +18,11 @@ async function getRepos() {
        reposData.innerHTML = '<span> Please enter a valid username </span>';
    } else {
        try {
+        spinner.style.display = 'block';
+  
+
+        await delay(1000);
+
   const response = await fetch(`https://api.github.com/users/${githubUser}/repos`);
   
   if (!response.ok) {
@@ -20,7 +33,7 @@ async function getRepos() {
   const data = await response.json();
   reposData.innerHTML = '';
 
-
+ spinner.style.display = 'none';
   
   if (data.length === 0) {
   reposData.innerHTML = `<span>No repositories found for user "${githubUser}".</span>`;
@@ -29,6 +42,7 @@ async function getRepos() {
 
   }  
        } catch (error) {
+       
         renderingError(error)
 
        }
